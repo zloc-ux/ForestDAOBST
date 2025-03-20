@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ForestDAOBST - Saving the Tropical Dry Forest</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.7.4/web3.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            text-align: center;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        header {
+            background-color: #2e7d32;
+            color: white;
+            padding: 20px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        main {
+            margin-top: 80px;
+        }
+        section {
+            padding: 40px;
+            margin: 50px 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        section:hover {
+            transform: scale(1.02);
+        }
+        a {
+            color: #2e7d32;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            margin: 10px 0;
+        }
+        #mapa {
+            height: 300px;
+        }
+        .floating-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #2e7d32;
+            color: white;
+            padding: 15px;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+        .dark-mode {
+            background-color: #121212;
+            color: white;
+        }
+        .dark-mode section {
+            background: #1e1e1e;
+            color: white;
+        }
+        .btn-metamask {
+            background: #f6851b;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .btn-donacion {
+            background: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .responsive-img {
+            width: 100%;
+            height: auto;
+            max-width: 400px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>ForestDAOBST</h1>
+        <p>Protecting the Tropical Dry Forest with the power of blockchain</p>
+        <P>(Decentralized Autonomous Organization) DAO</P>
+        <button onclick="toggleDarkMode()">🌙</button>
+    </header>
+    
+    <main>
+        <section id="about" data-aos="fade-up">
+            <h2>What is ForestDAOBST (BST)?</h2>
+            <img src="images/LOG23.png" alt="ForestDAO Logo" class="responsive-img">
+            <p>ForestDAOBST is a decentralized initiative with the goal of acquiring strategic land and protecting the Tropical Dry Forest.</p>
+            <h2>How does it work?</h2>
+            <p>(Decentralized Autonomous Organization) DAO for the Conservation of the Tropical Dry Forest
+
+                Why is it urgent?
+             The Tropical Dry Forest has lost more than 92% of its original cover in Colombia. Deforestation and the lack of resources for conservation are affecting biodiversity and the climate.
+
+             Our Solution
+             We will create a decentralized DAO to purchase and protect critical lands.
+             Using blockchain and smart contracts, we provide transparency and security. We monetize with carbon offsets, NFTs, and staking $FORESTBST (BST).
+
+             Business Model
+             We raise funds with Web3 crowdfunding, NFTs, and tokens. We purchase land and manage restoration projects. The community governs the DAO through token votes, and we monetize through carbon offsets and ecotourism NFTs.
+                
+            </p>
+        </section>
+        
+        <section id="nfts" data-aos="fade-up">
+            <h2>Our NFTs</h2>
+            <p>Purchase an NFT and be part of the conservation of the Tropical Dry Forest.
+                Each purchase directly contributes to land protection and grants you recognition on our DAO page and social media.</p>
+            <p>Companies and individuals who purchase our NFTs will be recognized as allies in the fight to preserve the environment.</p>
+            <h2>Tokenized Carbon Bonds</h2>
+            <p>To create future bonds, we follow these steps:
+                Solidity smart contract that issues ERC-1155 tokens (allows multiple tokens in a single contract). Each token represents one ton of carbon captured.
+            Carbon Audit: Carbon capture on protected lands is certified.
+            Blockchain Registration: Each bond is issued as an NFT or fungible token that companies can buy, transfer, or sell.
+            Secondary Market: Bonds can be traded on markets like OpenSea or carbon marketplaces.</p>
+            <a href="https://opensea.io/forestdaobst" target="_blank">Visit us on OpenSea</a>
+        </section>
+        
+        <section id="map" data-aos="fade-up">
+            <h2>Conservation Zones</h2>
+            <div id="mapa"></div>
+        </section>
+        
+        <section id="roadmap" data-aos="fade-up">
+            <h2>Roadmap</h2>
+            <ul>
+                <li><strong>Phase 1:</strong> Creation of the DAO and issuance of the $FORESTBST (BST) token</li>
+                <li><strong>Phase 2:</strong> Identification and acquisition of strategic lands</li>
+                <li><strong>Phase 3:</strong> Development of infrastructure for conservation</li>
+                <li><strong>Phase 4:</strong> Expansion and new alliances/li>
+            </ul>
+        </section>
+        
+        <section id="contact" data-aos="fade-up">
+            <h2>Join the Community</h2>
+            <ul>
+                <li><a href="https://discord.gg/forestdao9" target="_blank">Join our Discord</a></li>
+                <li><a href="https://t.me/ForestDAO9" target="_blank">Join our Telegram group</a></li>
+                <li><a href="https://twitter.com/projectdao9" target="_blank">Follow us on Twitter</a></li>
+                <li><a href="https://www.instagram.com/projectdao9/" target="_blank">Follow us on Instagram</a></li>
+                <li><a href="https://www.youtube.com/channel/UCijUCCF8oAHZHR4ICFYqZCA" target="_blank">Follow us on YouTube</a></li>
+                <li><a href="https://opensea.io/forestdaobst" target="_blank">Follow us on Opensea</a></li>
+
+            </ul>
+            <!-- Botón para descargar el PDF -->
+            <a href="images/explanation.pdf" download>
+                <button>Download Pitch Deck (PDF)</button>
+            </a>
+        </section>
+    </main>
+    
+    <div class="floating-btn" onclick="window.location.href='https://t.me/ForestDAO'">📢</div>
+    
+    <script>
+        AOS.init();
+        
+        function initMap() {
+            var map = L.map('mapa').setView([10.0, -75.0], 5);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; OpenStreetMap contributors'
+            }).addTo(map);
+            L.marker([10.0, -75.0]).addTo(map)
+                .bindPopup('Zona de Conservación')
+                .openPopup();
+        }
+        
+        document.addEventListener("DOMContentLoaded", function() {
+            initMap();
+        });
+        
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark-mode");
+        }
+        
+     
+        
+    </script>
+</body>
+</html>
